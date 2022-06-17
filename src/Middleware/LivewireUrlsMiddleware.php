@@ -23,11 +23,27 @@ class LivewireUrlsMiddleware
         session()->push('livewire-urls.history', $currentUrl);
         session()->push('livewire-urls.history-route', $currentRoute);
 
+        $this->trimSession();
+
         return $next($request);
     }
 
     protected function isLivewireRequest(): bool
     {
         return class_exists(LivewireManager::class) && app(LivewireManager::class)->isLivewireRequest();
+    }
+
+    protected function trimSession(): void
+    {
+        $history = session()->get('livewire-urls.history', []);
+        $historyRoute = session()->get('livewire-urls.history-route', []);
+
+        if (count($history) > 20) {
+            session()->put('livewire-urls.history', collect($history)->reverse()->slice(0, 20)->reverse()->all());
+        }
+
+        if (count($historyRoute) > 20) {
+            session()->put('livewire-urls.history-route', collect($historyRoute)->reverse()->slice(0, 20)->reverse()->all());
+        }
     }
 }
