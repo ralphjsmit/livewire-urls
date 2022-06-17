@@ -1,22 +1,10 @@
+# Get the current and previous url in Livewire.
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
+This package gives you a simple way to retrieve the current and previous URL in Livewire.
 
-# Get the previous and current url in Livewire.
+Unfortunately, Laravel or Livewire cannot handle this for you, since Livewire also makes requests to your server when a user interacts with your webpage. This means that the usual methods like `URL()->current()` point to an internal Livewire route, instead of the "real route" your user is on.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/ralphjsmit/livewire-urls.svg?style=flat-square)](https://packagist.org/packages/ralphjsmit/livewire-urls)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/ralphjsmit/livewire-urls/run-tests?label=tests)](https://github.com/ralphjsmit/livewire-urls/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/ralphjsmit/livewire-urls/Check%20&%20fix%20styling?label=code%20style)](https://github.com/ralphjsmit/livewire-urls/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/ralphjsmit/livewire-urls.svg?style=flat-square)](https://packagist.org/packages/ralphjsmit/livewire-urls)
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/livewire-urls.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/livewire-urls)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+This package gives you a simple middleware and helper method to determine which URL is currently being used.
 
 ## Installation
 
@@ -26,62 +14,48 @@ You can install the package via composer:
 composer require ralphjsmit/livewire-urls
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="livewire-urls-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="livewire-urls-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="livewire-urls-views"
-```
+Next, you should add the `LivewireUrlsMiddleware` to your Http `Kernel.php`. You should add it to the `web` key of the `$middlewareGroups` property.
 
 ## Usage
 
+### Getting the current url
+
 ```php
-$livewireUrls = new RalphJSmit\LivewireUrls();
-echo $livewireUrls->echoPhrase('Hello, RalphJSmit!');
+use RalphJSmit\Livewire\Urls\Facades\Url;
+
+$currentUrl = Url::current();
 ```
 
-## Testing
+### Getting the current route
 
-```bash
-composer test
+```php
+$currentRouteName = Url::currentRoute();
 ```
 
-## Changelog
+The `Url::currentRoute()` returns `null` when the user is on a route without a name.
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+### Getting the previous url
 
-## Contributing
+```php
+$previousUrl = Url::previous();
+```
 
-Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
+The `Url::previous()`-method returns `null` when there isn't a previous route available.
 
-## Security Vulnerabilities
+### Getting the previous route
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+```php
+$previousRouteName = Url::previousRoute();
+```
 
-## Credits
+The `Url::previousRoute()` returns `null` when there isn't a previous route of if the previous route wasn't a named route.
 
-- [Ralph J. Smit](https://github.com/ralphjsmit)
-- [All Contributors](../../contributors)
+## General
 
-## License
+🐞 If you spot a bug, please submit a detailed issue and I'll try to fix it as soon as possible.
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+🔐 If you discover a vulnerability, please review [our security policy](../../security/policy).
+
+🙌 If you want to contribute, please submit a pull request. All PRs will be fully credited. If you're unsure whether I'd accept your idea, feel free to contact me!
+
+🙋‍♂️ [Ralph J. Smit](https://ralphjsmit.com)
