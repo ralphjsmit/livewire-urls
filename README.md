@@ -50,7 +50,7 @@ The `Url::previous()`-method returns `null` when there isn't a previous route av
 $previousRouteName = Url::previousRoute();
 ```
 
-The `Url::previousRoute()` returns `null` when there isn't a previous route of if the previous route wasn't a named route.
+The `Url::previousRoute()` returns `null` when there isn't a previous route or if the previous route wasn't a named route.
 
 ## General
 
