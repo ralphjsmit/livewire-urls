@@ -23,5 +23,30 @@ class Url
     {
         return session()->get('livewire-urls.previous-route', $fallback);
     }
-}
 
+    public function lastRecorded(?string $fallback = null): ?string
+    {
+        $lastUrlFromHistory = collect(session()->get('livewire-urls.history'))
+            ->unique()
+            ->first();
+
+        if ($lastUrlFromHistory === $this->current($fallback)) {
+            return null;
+        }
+
+        return $lastUrlFromHistory;
+    }
+
+    public function lastRecordedRoute(?string $fallback = null): ?string
+    {
+        $lastRouteFromHistory = collect(session()->get('livewire-urls.history-route'))
+            ->unique()
+            ->first();
+
+        if ($lastRouteFromHistory === $this->currentRoute($fallback)) {
+            return null;
+        }
+
+        return $lastRouteFromHistory;
+    }
+}

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static null|string currentRoute( ?string $fallback = null )
  * @method static null|string previous( ?string $fallback = null )
  * @method static null|string previousRoute( ?string $fallback = null )
+ * @method static null|string lastRecorded( ?string $fallback = null )
+ * @method static null|string lastRecordedRoute( ?string $fallback = null )
  */
 class Url extends Facade
 {

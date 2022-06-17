@@ -20,7 +20,7 @@ Next, you should add the `LivewireUrlsMiddleware` to your Http `Kernel.php`. You
 
 ## Usage
 
-### Getting the current url
+### Current url
 
 ```php
 use RalphJSmit\Livewire\Urls\Facades\Url;
@@ -28,7 +28,7 @@ use RalphJSmit\Livewire\Urls\Facades\Url;
 $currentUrl = Url::current();
 ```
 
-### Getting the current route
+### Current route
 
 ```php
 $currentRouteName = Url::currentRoute();
@@ -36,7 +36,7 @@ $currentRouteName = Url::currentRoute();
 
 The `Url::currentRoute()` returns `null` when the user is on a route without a name.
 
-### Getting the previous url
+### Previous url
 
 ```php
 $previousUrl = Url::previous();
@@ -44,13 +44,39 @@ $previousUrl = Url::previous();
 
 The `Url::previous()`-method returns `null` when there isn't a previous route available.
 
-### Getting the previous route
+### Previous route
 
 ```php
 $previousRouteName = Url::previousRoute();
 ```
 
 The `Url::previousRoute()` returns `null` when there isn't a previous route or if the previous route wasn't a named route.
+
+### Last recorded url
+
+You can use the `Url::lastRecorded()` method to get the last url from the history that is _different_ from the current url.
+
+For example:
+
+1. User visits page A
+2. User visits page B
+3. User visits page B
+
+The `Url::lastRecorded()` would give you the url of page A. The function returns `null` when there isn't an other url found, apart from the current session.
+
+```php
+$lastRecordedUrl = Url::lastRecorded();
+```
+
+### Last recorded route
+
+You can use the `Url::lastRecordedRoute()` method to get the last route from the history that is _different_ from the current url/route.
+
+```php
+$lastRecordedRoute = Url::lastRecordedRoute();
+```
+
+The `Url::lastRecordedRoute()` would give you the route of page A from the previous example, **if page A is on a named route**. Otherwise, it would return `null`. The function also returns `null` when there isn't an other url found, apart from the current session.
 
 ## General
 
