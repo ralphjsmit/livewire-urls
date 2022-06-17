@@ -2,11 +2,11 @@
 
 # Get the current and previous url in Livewire.
 
-This package gives you a simple way to retrieve the current and previous URL in Livewire.
+This package gives you a simple way to **retrieve the current and previous URL** in Livewire.
 
-Unfortunately, Laravel or Livewire cannot handle this for you, since Livewire also makes requests to your server when a user interacts with your webpage. This means that the usual methods like `URL()->current()` point to an internal Livewire route, instead of the "real route" your user is on.
+Unfortunately, Laravel or Livewire **cannot handle** this for you, since Livewire also makes requests to your server when a user interacts with your webpage. This means that the usual methods like `URL()->current()` **point to an internal Livewire** route, instead of the **"real route" your user is on**.
 
-This package gives you a simple middleware and helper method to determine which URL is currently being used.
+This package provides you with a middleware and **helper methods to determine which URL is currently being used**.
 
 ## Installation
 
