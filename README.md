@@ -1,3 +1,5 @@
+![livewire-urls](https://github.com/ralphjsmit/livewire-urls/blob/main/docs/images/livewire-urls.jpg)
+
 # Get the current and previous url in Livewire.
 
 This package gives you a simple way to retrieve the current and previous URL in Livewire.
