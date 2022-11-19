@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use RalphJSmit\Livewire\Urls\Facades\Url;
-use RalphJSmit\Livewire\Urls\Middleware\LivewireUrlsMiddleware;
-use RalphJSmit\Livewire\Urls\Tests\Fixtures\TestComponent;
-
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
+use RalphJSmit\Livewire\Urls\Facades\Url;
+
+use RalphJSmit\Livewire\Urls\Middleware\LivewireUrlsMiddleware;
+use RalphJSmit\Livewire\Urls\Tests\Fixtures\TestComponent;
 
 it('can store the user url in the session on a visit', function () {
     Route::get('test')->middleware(LivewireUrlsMiddleware::class)->name('route.test');
@@ -75,6 +75,4 @@ it('can store the user url in the session on a visit on a mix of named and unnam
     expect(Url::currentRoute())->toBe('route.test');
     expect(Url::lastRecorded())->toEndWith('/test-without-name');
     expect(Url::lastRecordedRoute())->toBeNull();
-
-    dump(session()->get('livewire-urls'));
 });
