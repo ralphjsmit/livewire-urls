@@ -29,10 +29,10 @@ class Url
         $lastUrlFromHistory = collect(session()->get('livewire-urls.history'))->first();
 
         if ($lastUrlFromHistory === $this->current($fallback)) {
-            return null;
+            return $fallback;
         }
 
-        return $lastUrlFromHistory;
+        return $lastUrlFromHistory ?? $fallback;
     }
 
     public function lastRecordedRoute(?string $fallback = null): ?string
@@ -40,9 +40,9 @@ class Url
         $lastRouteFromHistory = collect(session()->get('livewire-urls.history-route'))->first();
 
         if ($lastRouteFromHistory === $this->currentRoute($fallback)) {
-            return null;
+            return $fallback;
         }
 
-        return $lastRouteFromHistory;
+        return $lastRouteFromHistory ?? $fallback;
     }
 }

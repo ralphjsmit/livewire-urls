@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use function Pest\Laravel\get;
-use function Pest\Laravel\post;
 use RalphJSmit\Livewire\Urls\Facades\Url;
-
 use RalphJSmit\Livewire\Urls\Middleware\LivewireUrlsMiddleware;
 use RalphJSmit\Livewire\Urls\Tests\Fixtures\TestComponent;
+
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
 it('can store the user url in the session on a visit', function () {
     Route::get('test')->middleware(LivewireUrlsMiddleware::class)->name('route.test');
@@ -75,4 +75,20 @@ it('can store the user url in the session on a visit on a mix of named and unnam
     expect(Url::currentRoute())->toBe('route.test');
     expect(Url::lastRecorded())->toEndWith('/test-without-name');
     expect(Url::lastRecordedRoute())->toBeNull();
+});
+
+it('can use the fallbacks', function () {
+    expect(Url::current())->toBeNull();
+    expect(Url::currentRoute())->toBeNull();
+    expect(Url::previous())->toBeNull();
+    expect(Url::previousRoute())->toBeNull();
+    expect(Url::lastRecorded())->toBeNull();
+    expect(Url::lastRecordedRoute())->toBeNull();
+
+    expect(Url::previous('https://rjs.test/example'))->toBe('https://rjs.test/example');
+    expect(Url::previousRoute('web.example'))->toBe('web.example');
+    expect(Url::current('https://rjs.test/example'))->toBe('https://rjs.test/example');
+    expect(Url::currentRoute('web.example'))->toBe('web.example');
+    expect(Url::lastRecorded('https://rjs.test/example'))->toBe('https://rjs.test/example');
+    expect(Url::lastRecordedRoute('web.example'))->toBe('web.example');
 });
