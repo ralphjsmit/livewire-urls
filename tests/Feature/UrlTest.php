@@ -1,12 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use function Pest\Laravel\delete;
+use function Pest\Laravel\get;
+use function Pest\Laravel\patch;
+
+use function Pest\Laravel\post;
+use function Pest\Laravel\put;
 use RalphJSmit\Livewire\Urls\Facades\Url;
 use RalphJSmit\Livewire\Urls\Middleware\LivewireUrlsMiddleware;
 use RalphJSmit\Livewire\Urls\Tests\Fixtures\TestComponent;
-
-use function Pest\Laravel\get;
-use function Pest\Laravel\post;
 
 it('can store the user url in the session on a visit', function () {
     Route::get('test')->middleware(LivewireUrlsMiddleware::class)->name('route.test');
@@ -91,4 +94,25 @@ it('can use the fallbacks', function () {
     expect(Url::currentRoute('web.example'))->toBe('web.example');
     expect(Url::lastRecorded('https://rjs.test/example'))->toBe('https://rjs.test/example');
     expect(Url::lastRecordedRoute('web.example'))->toBe('web.example');
+});
+
+it('will exclude all request types apart from GET', function () {
+    Route::get('get')->middleware(LivewireUrlsMiddleware::class)->name('route.get');
+    Route::post('post')->middleware(LivewireUrlsMiddleware::class)->name('route.post');
+    Route::put('put')->middleware(LivewireUrlsMiddleware::class)->name('route.put');
+    Route::patch('patch')->middleware(LivewireUrlsMiddleware::class)->name('route.patch');
+    Route::delete('delete')->middleware(LivewireUrlsMiddleware::class)->name('route.delete');
+
+    get('get');
+    post('post');
+    put('put');
+    patch('patch');
+    delete('delete');
+
+    expect(Url::previous())->toBeNull();
+    expect(Url::previousRoute())->toBeNull();
+    expect(Url::current())->toBe(route('route.get'));
+    expect(Url::currentRoute())->toBe('route.get');
+    expect(Url::lastRecorded())->toBeNull();
+    expect(Url::lastRecordedRoute())->toBeNull();
 });

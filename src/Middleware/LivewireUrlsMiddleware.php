@@ -14,6 +14,10 @@ class LivewireUrlsMiddleware
             return $next($request);
         }
 
+        if ($this->isMethodNotSupported($request)) {
+            return $next($request);
+        }
+
         session()->put('livewire-urls.previous', session()->get('livewire-urls.current', null));
         session()->put('livewire-urls.previous-route', session()->get('livewire-urls.current-route', null));
 
@@ -31,6 +35,11 @@ class LivewireUrlsMiddleware
     protected function isLivewireRequest(): bool
     {
         return class_exists(LivewireManager::class) && app(LivewireManager::class)->isLivewireRequest();
+    }
+
+    protected function isMethodNotSupported(Request $request): bool
+    {
+        return ! in_array($request->method(), ['GET']);
     }
 
     protected function trimSession(): void
