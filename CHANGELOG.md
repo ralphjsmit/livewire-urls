@@ -2,6 +2,11 @@
 
 All notable changes to `ralphjsmit/livewire-urls` will be documented in this file.
 
+## 1.1.3 - 2022-11-19
+
+– Fix: fallbacks not used in last route recorded.
+– Fix: exclude all request types apart from GET.
+
 ## 1.1.2 - 2022-07-14
 
 - Store full url including query string.
