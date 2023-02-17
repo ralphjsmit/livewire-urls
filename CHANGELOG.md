@@ -2,6 +2,11 @@
 
 All notable changes to `ralphjsmit/livewire-urls` will be documented in this file.
 
+## 1.2.0 - 2023-02-17
+
+- Add Laravel 10 support in #10
+- Fix `lastRecorded` logic in #11
+
 ## 1.1.3 - 2022-11-19
 
 – Fix: fallbacks not used in last route recorded.
