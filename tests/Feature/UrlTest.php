@@ -1,19 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use function Pest\Laravel\delete;
-use function Pest\Laravel\get;
-use function Pest\Laravel\patch;
-
-use function Pest\Laravel\post;
-use function Pest\Laravel\put;
 use RalphJSmit\Livewire\Urls\Facades\Url;
 use RalphJSmit\Livewire\Urls\Middleware\LivewireUrlsMiddleware;
 use RalphJSmit\Livewire\Urls\Tests\Fixtures\TestComponent;
 
+use function Pest\Laravel\delete;
+use function Pest\Laravel\get;
+use function Pest\Laravel\patch;
+use function Pest\Laravel\post;
+use function Pest\Laravel\put;
+
 it('can store the user url in the session on a visit', function () {
-    Route::get('test')->middleware(LivewireUrlsMiddleware::class)->name('route.test');
-    Route::get('test-b')->middleware(LivewireUrlsMiddleware::class)->name('route.test-b');
+    Route::get('test', fn () => 'ok')->middleware(LivewireUrlsMiddleware::class)->name('route.test');
+    Route::get('test-b', fn () => 'ok')->middleware(LivewireUrlsMiddleware::class)->name('route.test-b');
 
     expect(session()->get('livewire-urls'))->toBeNull();
 
@@ -55,7 +55,7 @@ it('can store the user url in the session on a visit', function () {
 });
 
 it('can store the user url in the session on a visit on a route without a route name', function () {
-    Route::get('/test-without-name')->middleware(LivewireUrlsMiddleware::class);
+    Route::get('/test-without-name', fn () => 'ok')->middleware(LivewireUrlsMiddleware::class);
 
     get('test-without-name');
 
@@ -66,8 +66,8 @@ it('can store the user url in the session on a visit on a route without a route 
 });
 
 it('can store the user url in the session on a visit on a mix of named and unnamed routes', function () {
-    Route::get('/test-without-name')->middleware(LivewireUrlsMiddleware::class);
-    Route::get('test')->middleware(LivewireUrlsMiddleware::class)->name('route.test');
+    Route::get('/test-without-name', fn () => 'ok')->middleware(LivewireUrlsMiddleware::class);
+    Route::get('test', fn () => 'ok')->middleware(LivewireUrlsMiddleware::class)->name('route.test');
 
     get('test-without-name');
     get('test');
@@ -97,11 +97,11 @@ it('can use the fallbacks', function () {
 });
 
 it('will exclude all request types apart from GET', function () {
-    Route::get('get')->middleware(LivewireUrlsMiddleware::class)->name('route.get');
-    Route::post('post')->middleware(LivewireUrlsMiddleware::class)->name('route.post');
-    Route::put('put')->middleware(LivewireUrlsMiddleware::class)->name('route.put');
-    Route::patch('patch')->middleware(LivewireUrlsMiddleware::class)->name('route.patch');
-    Route::delete('delete')->middleware(LivewireUrlsMiddleware::class)->name('route.delete');
+    Route::get('get', fn () => 'ok')->middleware(LivewireUrlsMiddleware::class)->name('route.get');
+    Route::post('post', fn () => 'ok')->middleware(LivewireUrlsMiddleware::class)->name('route.post');
+    Route::put('put', fn () => 'ok')->middleware(LivewireUrlsMiddleware::class)->name('route.put');
+    Route::patch('patch', fn () => 'ok')->middleware(LivewireUrlsMiddleware::class)->name('route.patch');
+    Route::delete('delete', fn () => 'ok')->middleware(LivewireUrlsMiddleware::class)->name('route.delete');
 
     get('get');
     post('post');
