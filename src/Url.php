@@ -26,16 +26,18 @@ class Url
 
     public function lastRecorded(?string $fallback = null): ?string
     {
-        return collect(session()->get('livewire-urls.history'))
+        $lastDifferentUrl = collect(session()->get('livewire-urls.history'))
             ->reverse()
             ->first(function (string $url): bool {
                 return $url !== $this->current();
-            }) ?? $fallback;
+            });
+
+        return $lastDifferentUrl ?? $fallback;
     }
 
     public function lastRecordedRoute(?string $fallback = null): ?string
     {
-        return collect(session()->get('livewire-urls.history-route'))
+        $lastDifferentRoute = collect(session()->get('livewire-urls.history-route'))
             ->reverse()
             ->first(function (?string $route): bool {
                 if ( $route === null ) {
@@ -43,6 +45,8 @@ class Url
                 }
 
                 return $route !== $this->currentRoute();
-            }) ?? $fallback;
+            });
+
+        return $lastDifferentRoute ?? $fallback;
     }
 }
