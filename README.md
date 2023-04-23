@@ -16,7 +16,7 @@ You can install the package via composer:
 composer require ralphjsmit/livewire-urls
 ```
 
-Next, you should add the `LivewireUrlsMiddleware` to your Http `Kernel.php`. You should add it to the `web` key of the `$middlewareGroups` property.
+Next, you should add `\RalphJSmit\Livewire\Urls\Middleware\LivewireUrlsMiddleware::class,` to your Http `Kernel.php`, in the `web` key of the `$middlewareGroups` property.
 
 ## Usage
 
