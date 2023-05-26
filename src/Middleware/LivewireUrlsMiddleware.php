@@ -21,7 +21,7 @@ class LivewireUrlsMiddleware
         session()->put('livewire-urls.previous', session()->get('livewire-urls.current', null));
         session()->put('livewire-urls.previous-route', session()->get('livewire-urls.current-route', null));
 
-        session()->put('livewire-urls.current', $currentUrl = $request->fullUrl());
+        session()->put('livewire-urls.current', $currentUrl = config('livewire-urls.include_url_query') ? $request->fullUrlWithQuery() : $request->fullUrl());
         session()->put('livewire-urls.current-route', $currentRoute = $request->route()?->getName());
 
         session()->push('livewire-urls.history', $currentUrl);
