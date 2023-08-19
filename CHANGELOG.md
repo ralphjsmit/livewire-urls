@@ -2,6 +2,10 @@
 
 All notable changes to `ralphjsmit/livewire-urls` will be documented in this file.
 
+## 1.3.0 - 2023-08-19
+
+- Add initial Livewire V3 beta support in #22 by @Orrison.
+
 ## 1.2.0 - 2023-02-17
 
 - Add Laravel 10 support in #10
