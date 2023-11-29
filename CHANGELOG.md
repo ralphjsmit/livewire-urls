@@ -2,6 +2,10 @@
 
 All notable changes to `ralphjsmit/livewire-urls` will be documented in this file.
 
+## 1.3.1 - 2023-11-29
+
+- Official support for Livewire v3.
+
 ## 1.3.0 - 2023-08-19
 
 - Add initial Livewire V3 beta support in #22 by @Orrison.
