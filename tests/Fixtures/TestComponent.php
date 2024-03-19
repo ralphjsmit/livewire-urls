@@ -8,6 +8,6 @@ class TestComponent extends Component
 {
     public function render(): string
     {
-        return "<div></div>";
+        return '<div></div>';
     }
 }

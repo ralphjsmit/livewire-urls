@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @see \RalphJSmit\Livewire\Urls\Url
+ *
  * @method static null|string current( ?string $fallback = null )
  * @method static null|string currentRoute( ?string $fallback = null )
  * @method static null|string previous( ?string $fallback = null )
