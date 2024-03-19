@@ -40,7 +40,7 @@ class Url
         $lastDifferentRoute = collect(session()->get('livewire-urls.history-route'))
             ->reverse()
             ->first(function (?string $route): bool {
-                if ( $route === null ) {
+                if ($route === null) {
                     return false;
                 }
 

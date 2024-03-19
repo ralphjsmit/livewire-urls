@@ -35,11 +35,11 @@ it('can store the user url in the session on a visit', function () {
     expect(Url::lastRecorded())->toBe(route('route.test'));
     expect(Url::lastRecordedRoute())->toBe('route.test');
 
-	$route = match(true)  {
-		Route::has('livewire.update') => 'livewire.update',
-		Route::has('livewire.message') => 'livewire.message',
-	};
-	
+    $route = match (true) {
+        Route::has('livewire.update') => 'livewire.update',
+        Route::has('livewire.message') => 'livewire.message',
+    };
+
     post(route($route, ['name' => TestComponent::class]));
 
     expect(Url::previous())->toBe(route('route.test'));
