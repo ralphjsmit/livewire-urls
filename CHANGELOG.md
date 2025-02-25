@@ -2,6 +2,10 @@
 
 All notable changes to `ralphjsmit/livewire-urls` will be documented in this file.
 
+## 1.5.0 - 2025-02-25
+
+- Feat: Laravel 12 support
+
 ## 1.4.0 - 2024-03-14
 
 - Laravel 11 Compatibility.
