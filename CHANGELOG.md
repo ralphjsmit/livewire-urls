@@ -2,6 +2,10 @@
 
 All notable changes to `ralphjsmit/livewire-urls` will be documented in this file.
 
+## 1.7.0 - 2026-03-12
+
+- Feat: Laravel 13 support
+
 ## 1.6.0 - 2026-01-27
 
 - Feat: Livewire v4 support
