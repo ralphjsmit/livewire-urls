@@ -37,6 +37,7 @@ it('can store the user url in the session on a visit', function () {
 
     $route = match (true) {
         Route::has('livewire.update') => 'livewire.update',
+        Route::has('default-livewire.update') => 'default-livewire.update',
         Route::has('livewire.message') => 'livewire.message',
     };
 
